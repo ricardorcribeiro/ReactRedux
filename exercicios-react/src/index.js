@@ -6,7 +6,7 @@ const element = document.getElementById('root')
  ReactDOM.render(
  
     <div>
-        <PrimeiroComponente/>
+        <PrimeiroComponente valor="Bom dia!" operacao={2**8}/>
     </div>
  
     , element)
