@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import PrimeiroComponente from './Componentes/PrimeiroComponente'
 import { CompA, CompB as B } from './Componentes/DoisComponentes'
-
+import Multiplo from './Componentes/MultiElementos'
 
 const element = document.getElementById('root')
  ReactDOM.render(
@@ -12,6 +12,8 @@ const element = document.getElementById('root')
 
         <CompA valor={Math.random()}/>
         <B valor="bananinha 123"/>
+
+        <Multiplo/>
     </div>
  
     , element)
