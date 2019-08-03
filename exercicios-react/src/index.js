@@ -12,14 +12,14 @@ const element = document.getElementById('root')
  
     <div>
         <PrimeiroComponente valor="Bom dia!" operacao={2**8}/>
-
+        <hr/>
         <CompA valor={Math.random()}/>
         <B valor="bananinha 123"/>
-
+        <hr/>
         <Multiplo/>
-
-        <FamiliaRibeiro/>
-
+        <hr/>
+        <FamiliaRibeiro sobrenome="rodrigues ribeiro"/>
+        <hr/>
         <Familia>
             <Membors nome="ricardo" sobrenome="ribeiro" />
             <Membors nome="rafaela" sobrenome="ribeiro" />
