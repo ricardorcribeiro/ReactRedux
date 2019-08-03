@@ -8,19 +8,17 @@ import Familia from './Componentes/Familia'
 import Membors from './Componentes/Membro'
 import ComponenteComFuncoes from './Componentes/ComponenteComFuncoes'
 import Pai from './Componentes/Pai'
+import ComponenteClasse from './Componentes/ComponenteClasse'
 
 const element = document.getElementById('root')
  ReactDOM.render(
  
     <div>
-        <PrimeiroComponente valor="Bom dia!" operacao={2**8}/>
+        <ComponenteClasse valor="componete classe"/>
         <hr/>
-        <CompA valor={Math.random()}/>
-        <B valor="bananinha 123"/>
+        <Pai/>
         <hr/>
-        <Multiplo/>
-        <hr/>
-        <FamiliaRibeiro sobrenome="rodrigues ribeiro"/>
+        <ComponenteComFuncoes/>
         <hr/>
         <Familia sobrenome="ribeiro">
             <Membors nome="ricardo" />
@@ -30,9 +28,14 @@ const element = document.getElementById('root')
             <Membors nome="gaia" />
         </Familia>
         <hr/>
-        <ComponenteComFuncoes/>
+        <FamiliaRibeiro sobrenome="rodrigues ribeiro"/>
         <hr/>
-        <Pai/>
+        <Multiplo/>
+        <hr/>
+        <CompA valor={Math.random()}/>
+        <B valor="bananinha 123"/>
+        <hr/>
+        <PrimeiroComponente valor="Bom dia!" operacao={2**8}/>
     </div>
     , element)
 
