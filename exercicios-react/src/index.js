@@ -7,6 +7,7 @@ import FamiliaRibeiro  from './Componentes/FamiliaRibeiro'
 import Familia from './Componentes/Familia'
 import Membors from './Componentes/Membro'
 import ComponenteComFuncoes from './Componentes/ComponenteComFuncoes'
+import Pai from './Componentes/Pai'
 
 const element = document.getElementById('root')
  ReactDOM.render(
@@ -30,8 +31,9 @@ const element = document.getElementById('root')
         </Familia>
         <hr/>
         <ComponenteComFuncoes/>
+        <hr/>
+        <Pai/>
     </div>
- 
     , element)
 
 
