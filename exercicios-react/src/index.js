@@ -20,13 +20,12 @@ const element = document.getElementById('root')
         <hr/>
         <FamiliaRibeiro sobrenome="rodrigues ribeiro"/>
         <hr/>
-        <Familia>
-            <Membors nome="ricardo" sobrenome="ribeiro" />
-            <Membors nome="rafaela" sobrenome="ribeiro" />
-            <Membors nome="mariza" sobrenome="ribeiro" />
-            <Membors nome="zeus" sobrenome="ribeiro" />
-            <Membors nome="gaia" sobrenome="ribeiro" />
-
+        <Familia sobrenome="ribeiro">
+            <Membors nome="ricardo" />
+            <Membors nome="rafaela"/>
+            <Membors nome="mariza"/>
+            <Membors nome="zeus" />
+            <Membors nome="gaia" />
         </Familia>
     </div>
  
