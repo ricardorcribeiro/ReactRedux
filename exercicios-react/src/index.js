@@ -6,6 +6,7 @@ import Multiplo from './Componentes/MultiElementos'
 import FamiliaRibeiro  from './Componentes/FamiliaRibeiro'
 import Familia from './Componentes/Familia'
 import Membors from './Componentes/Membro'
+import ComponenteComFuncoes from './Componentes/ComponenteComFuncoes'
 
 const element = document.getElementById('root')
  ReactDOM.render(
@@ -27,6 +28,8 @@ const element = document.getElementById('root')
             <Membors nome="zeus" />
             <Membors nome="gaia" />
         </Familia>
+        <hr/>
+        <ComponenteComFuncoes/>
     </div>
  
     , element)
