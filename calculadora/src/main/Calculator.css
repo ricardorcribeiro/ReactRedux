@@ -1,0 +1,9 @@
+.calculator{
+    height: 320px;
+    width: 235px;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: repeat(4,25%); /*montei um grid onde de 4 colunas cada uma delas ocupando 25% de elemento*/
+    grid-template-rows: 1fr  48px 48px 48px 48px 48px;
+}
