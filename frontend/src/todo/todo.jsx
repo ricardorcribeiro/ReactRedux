@@ -1,23 +1,52 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+
 import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
 
+const URL = 'https://localhost:5001/api/todo'
+
 export default class Todo extends Component{
     constructor(props){
         super(props)
+        this.state = { description: 'FGDFGDF', list: [] }
+
         this.handleAdd = this.handleAdd.bind(this) //o this nesse contesto e a classe pois esta no contrutor dela
+        this.handleChange = this.handleChange.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
+        
+        this.refhesh()
     }
+
+    refhesh(){
+        axios.get(URL).then(resul=> this.setState({...this.state, description : '', list: resul.data}))
+    }
+
+    handleChange(e){
+        this.setState({...this.state, description : e.target.value })
+    }
+
     handleAdd(){
-        console.log(this)
+        const description = this.state.description;
+        axios.post(URL,{description}).then(resp=> this.refhesh())
+    }
+
+    handleRemove(todo){
+        axios.delete(`${URL}/${todo._id}`)
+        .then(resp=> this.refhesh())
     }
     
     render(){
         return(
             <div>
                 <PageHeader name="Tarefas" small="Cadastro"/>
-                <TodoForm handleAdd={this.handleAdd}/>
-                <TodoList/>
+                <TodoForm description={this.description}
+                    handleChange={this.handleChange}
+                    handleAdd={this.handleAdd} />
+                <TodoList list={this.state.list} 
+                    handleRemove={this.handleRemove}
+                    />
             </div>
         )
     }

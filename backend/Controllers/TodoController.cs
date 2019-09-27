@@ -32,13 +32,13 @@ namespace backend.Controllers
             => _colletion.InsertOne(todo);
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put(string id, [FromBody] Todo todo)
             => _colletion.ReplaceOne(x => x._id == ObjectId.Parse(id), todo);
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(string id)
-            => _colletion.DeleteOne(x=> x._id == ObjectId.Parse(id));
+        public void Delete(ObjectId id)
+            => _colletion.DeleteOne(x=> x._id == id);
     }
 }

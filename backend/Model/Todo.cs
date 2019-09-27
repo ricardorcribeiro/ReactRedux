@@ -10,6 +10,6 @@ namespace backend.Model
         public ObjectId _id { get; set; }
         public string Description { get; set; }
         public bool Done { get; set; }
-        public DateTime CreateAt { get; set; }
+        public DateTime CreateAt { get; set; } = DateTime.Now;
     }
 }
