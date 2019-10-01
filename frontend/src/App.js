@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css'; 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
+import './template/custom.css'
 // import Todo from './todo/todo'
 // import About from './about/about'
 import Menu from './template/menu'
@@ -13,13 +14,3 @@ export default props =>
   <Menu/>
   <Routes/>
 </div>
-
-
-// function App() {
-//   return (
-//     <div className="conteiner">
-//     </div>
-//   );
-// }
-
-// export default App;

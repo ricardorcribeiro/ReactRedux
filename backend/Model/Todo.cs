@@ -7,7 +7,8 @@ namespace backend.Model
     public class Todo
     {
         [BsonId]
-        public ObjectId _id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
         public string Description { get; set; }
         public bool Done { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.Now;

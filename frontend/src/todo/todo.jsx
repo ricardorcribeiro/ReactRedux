@@ -15,6 +15,8 @@ export default class Todo extends Component{
         this.handleAdd = this.handleAdd.bind(this) //o this nesse contesto e a classe pois esta no contrutor dela
         this.handleChange = this.handleChange.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
+        this.handleMarkAsPending = this.handleMarkAsPending.bind(this)
         
         this.refhesh()
     }
@@ -36,15 +38,28 @@ export default class Todo extends Component{
         axios.delete(`${URL}/${todo._id}`)
         .then(resp=> this.refhesh())
     }
+
+    handleMarkAsDone(todo){
+        axios.post(`${URL}/Editar`, {...todo, done: true})
+        .then(resp=> this.refhesh());
+    }
+
+    handleMarkAsPending(todo){
+        axios.post(`${URL}/Editar`, {...todo, done: false})
+        .then(resp=> this.refhesh());
+    }
     
     render(){
         return(
             <div>
                 <PageHeader name="Tarefas" small="Cadastro"/>
-                <TodoForm description={this.description}
+                <TodoForm 
+                    description={this.description}
                     handleChange={this.handleChange}
                     handleAdd={this.handleAdd} />
                 <TodoList list={this.state.list} 
+                    handleMarkAsDone={this.handleMarkAsDone}
+                    handleMarkAsPending={this.handleMarkAsPending}
                     handleRemove={this.handleRemove}
                     />
             </div>
