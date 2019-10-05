@@ -17,7 +17,7 @@ export default props => {
                         onClick={()=>props.handleMarkAsPending(todo)}/>
 
                     <IconButton style='danger' icon='trash-o' hide={!todo.done}
-                    onClick={()=> props.handleRemove(todo)}/>
+                        onClick={()=> props.handleRemove(todo)}/>
                 </td>
             </tr>
         ))
@@ -27,7 +27,7 @@ return(
             <thead>
                 <tr>
                     <td>Descrição</td>
-                    <td>ações</td>
+                    <td className="tableAction">ações</td>
                 </tr>
             </thead>
             <tbody>

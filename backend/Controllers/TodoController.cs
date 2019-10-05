@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using backend.Model;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -18,15 +19,18 @@ namespace backend.Controllers
             _colletion = client.GetDatabase("databasetodo").GetCollection<Todo>("todo");
         }
         [HttpGet]
-        public ActionResult<IEnumerable<Todo>> Get()
+        public ActionResult<IEnumerable<Todo>> Get(string description = "")
         {
             var todos = _colletion.Find<Todo>(Builders<Todo>.Filter.Empty).ToList();
+            if(!string.IsNullOrWhiteSpace(description))
+                todos = todos.Where(x=> x.Description.Contains(description)).ToList();
             return todos;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<Todo> Get(string id)
+        [ActionName("get")]
+        public ActionResult<Todo> GetById(string id)
             => _colletion.Find<Todo>(x => x._id == id).Single();
 
         // POST api/values
