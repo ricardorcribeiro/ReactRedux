@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-
 import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
@@ -65,7 +64,7 @@ export default class Todo extends Component{
             <div>
                 <PageHeader name="Tarefas" small="Cadastro"/>
                 <TodoForm 
-                    description={this.description}
+                    description={this.state.description}
                     handleChange={this.handleChange}
                     handleSearch={this.handleSearch}
                     handleClear={this.handleClear}
