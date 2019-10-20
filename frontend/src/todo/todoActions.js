@@ -18,7 +18,7 @@ export const search = () => {
 export const add = description => {
     return dispatch => { // o redux-thunk faz que nao retorna uma action mas retorna um dispatch
         axios.post(URL, { description })
-            .then(resp => dispatch({ type: 'TODO_ADDED', payload: resp.data }))
+            .then(resp => dispatch({ type: 'TODO_CLEAR', payload: resp.data }))
             .then(resp => dispatch(search()))
     }
 }
@@ -26,7 +26,6 @@ export const add = description => {
 export const markAsDone = todo => {
     return dispatch => {
         axios.post(`${URL}/Editar`, { ...todo, done: true })
-            .then(resp => dispatch({type: 'TODO_MASKED_AS_DONE', payload: { ...todo, done: true }}))
             .then(resp => dispatch(search()));
     }
 }
@@ -34,7 +33,6 @@ export const markAsDone = todo => {
 export const markAsPending = todo => {
     return dispatch => {
         axios.post(`${URL}/Editar`, { ...todo, done: false })
-            .then(resp => dispatch({type: 'TODO_MASKED_AS_DONE', payload: { ...todo, done: false }}))
             .then(resp => dispatch(search()));
     }
 }
@@ -42,6 +40,10 @@ export const markAsPending = todo => {
 export const remove = todo => {
     return dispatch => {
         axios.delete(`${URL}/${todo._id}`)
-            .then(resp=> dispatch(search()))
+            .then(resp => dispatch(search()))
     }
+}
+
+export const clear = () => {
+    return { type: 'TODO_CLEAR' }
 }
