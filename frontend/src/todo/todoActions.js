@@ -7,18 +7,41 @@ export const changeDescription = event => ({
     payload: event.target.value
 })
 
-export const search = ()=> {
+export const search = () => {
     const request = axios.get(URL)
-    return{
-        type:'TODO_SEARCHED',
+    return {
+        type: 'TODO_SEARCHED',
         payload: request
     }
 }
 
 export const add = description => {
-    const request = axios.post(URL,{description})
-    return {
-        type: 'TODO_ADDED',
-        payload: request
+    return dispatch => { // o redux-thunk faz que nao retorna uma action mas retorna um dispatch
+        axios.post(URL, { description })
+            .then(resp => dispatch({ type: 'TODO_ADDED', payload: resp.data }))
+            .then(resp => dispatch(search()))
+    }
+}
+
+export const markAsDone = todo => {
+    return dispatch => {
+        axios.post(`${URL}/Editar`, { ...todo, done: true })
+            .then(resp => dispatch({type: 'TODO_MASKED_AS_DONE', payload: { ...todo, done: true }}))
+            .then(resp => dispatch(search()));
+    }
+}
+
+export const markAsPending = todo => {
+    return dispatch => {
+        axios.post(`${URL}/Editar`, { ...todo, done: false })
+            .then(resp => dispatch({type: 'TODO_MASKED_AS_DONE', payload: { ...todo, done: false }}))
+            .then(resp => dispatch(search()));
+    }
+}
+
+export const remove = todo => {
+    return dispatch => {
+        axios.delete(`${URL}/${todo._id}`)
+            .then(resp=> dispatch(search()))
     }
 }
