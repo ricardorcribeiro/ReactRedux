@@ -30,7 +30,7 @@ namespace MyMoneyApp.Api
                 options.AddPolicy("minhaEspecificacoesDeOrigem",
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000")//.AllowAnyOrigin()
+                    builder.WithOrigins("http://localhost:8080")//.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials();
