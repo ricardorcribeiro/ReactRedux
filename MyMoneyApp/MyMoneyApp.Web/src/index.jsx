@@ -4,6 +4,8 @@ import {applyMiddleware ,createStore} from 'redux'
 import {Provider} from 'react-redux'
 
 import promise from 'redux-promise'
+import multi from 'redux-multi'// Middleware para chamar mais de uma action por vez
+import thunk from 'redux-thunk'// Middleware para fazer uma multi chamada de actions esperar o result da promises para execultar a proxima acion
 
 import App from './main/app'
 import reducers from './main/reducers'

@@ -18,7 +18,6 @@ namespace MyMoneyApp.Api.Controllers
             _colletion = client.GetDatabase("databaseBillingCycle").GetCollection<BillingCycle>("BillingCycle");
         }
 
-
         [HttpGet]
         public ActionResult<IEnumerable<BillingCycle>> Get(int? skip, int? limit)
             => _colletion.Find<BillingCycle>(Empty).Skip(skip).Limit(limit).ToList();
