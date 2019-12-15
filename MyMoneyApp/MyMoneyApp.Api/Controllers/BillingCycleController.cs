@@ -48,8 +48,8 @@ namespace MyMoneyApp.Api.Controllers
         {
             var listBinlling  = _colletion.Find(Empty).ToList();
             return new { 
-                        Cretits = listBinlling.SelectMany(x=> x.Cretits).Sum(c=> c.Value), 
-                        Debts = listBinlling.SelectMany(x=> x.Debts).Sum(d=> d.Value) 
+                        Cretits = listBinlling.Where(x=> x.Cretits?.Any() == true).SelectMany(x=> x.Cretits).Sum(c=> c.Value), 
+                        Debts = listBinlling.Where(x=> x.Debts?.Any() == true).SelectMany(x=> x.Debts).Sum(d=> d.Value) 
                     };
         }
     }

@@ -22,11 +22,18 @@ export function create(values) {
                     resetForm('billingCycleForm'),//billingCycleForm e o nome do formulario definido no arquivo jsx do mesmo
                     getList(),
                     selectTab('tabList'),
-                    showTabs('tabList','tabCreate')
+                    showTabs('tabList', 'tabCreate')
                 ])
             })
             .catch(e => {
                 e.response.data.errors['$.month'].forEach(error => toastr.error('Erro', error));
             })
     }
+}
+
+export function showUpdate(billingCycle) {
+    return [
+        selectTab('tabUpdate'),
+        showTabs('tabUpdate')
+    ]
 }
