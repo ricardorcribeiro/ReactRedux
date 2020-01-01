@@ -31,9 +31,12 @@ namespace MyMoneyApp.Api.Controllers
         public void Post(BillingCycle billingCycle)
             => _colletion.InsertOne(billingCycle);
 
-        [HttpPost("Editar")]
-        public void Editar(BillingCycle billingCycle)
-            => _colletion.ReplaceOne(x => x._id == billingCycle._id, billingCycle);
+        // [HttpPost("Editar")]
+        // public void Editar(BillingCycle billingCycle)
+        //     => _colletion.ReplaceOne(x => x._id == billingCycle._id, billingCycle);
+        [HttpPut("{id}")]
+        public void Put(string id, [FromBody]BillingCycle billingCycle)
+            => _colletion.ReplaceOne(x => x._id == id, billingCycle);
 
         [HttpDelete("{id}")]
         public void Delete(string id)
