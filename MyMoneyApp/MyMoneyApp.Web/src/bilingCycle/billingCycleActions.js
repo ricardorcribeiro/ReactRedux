@@ -4,7 +4,7 @@ import { reset as resetForm, initialize } from 'redux-form'//reset e um reduce /
 import { showTabs, selectTab } from '../common/tab/tabActions'
 
 const BASE_URL = 'https://localhost:5001/api/'
-const INITIAL_VALUES = {}
+const INITIAL_VALUES = {credits:[{}]}
 export function getList() {
     const request = axios.get(`${BASE_URL}BillingCycle`)
     return {
@@ -20,6 +20,9 @@ export function create(values) {
 export function update(values) {
     return submit(values, 'put')
 }
+export function remove(values) {
+    return submit(values, 'delete')
+}
 
 function submit(values, method) {
     return dispatch => {
@@ -30,7 +33,8 @@ function submit(values, method) {
                 dispatch(init())
             })
             .catch(e => {
-                e.response.data.errors['$.month'].forEach(error => toastr.error('Erro', error));
+                if(e.response.data.errors['$.month'] != null)
+                    e.response.data.errors['$.month'].forEach(error => toastr.error('Erro', error));
             })
     }
 }
