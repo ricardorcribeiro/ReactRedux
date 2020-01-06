@@ -6,29 +6,40 @@ import { reduxForm, Field, formValueSelector } from 'redux-form'//formValueSelec
 import { init } from './billingCycleActions'
 import LabelAndInput from '../common/form/labelAndInput'
 import CreditList from './itemList'
+import Summary from './summary'
 
 class BillingCycleForm extends Component {
+
+    calculateSummart() {
+        const sum = (t, v) => t + v
+        return {
+            sumOfCredits: this.props.credits.map(x => +x.value || 0).reduce(sum),
+            sumOfDebts: this.props.debts.map(x => +x.value || 0).reduce(sum)
+        }
+    }
+
     render() {
-
-        const { handleSubmit, readOnly, credits } = this.props //handleSubmit um metodo do do redux-form
-
+        const { handleSubmit, readOnly, credits, debts } = this.props //handleSubmit um metodo do do redux-form
+        const { sumOfCredits, sumOfDebts } = this.calculateSummart()
         return (
             <form role='form' onSubmit={handleSubmit}>
                 <div className='box-body'>
-                    <Field name='name' readOnly={readOnly} 
-                        component={LabelAndInput} label='Nome' cols='12 4' 
+                    <Field name='name' readOnly={readOnly}
+                        component={LabelAndInput} label='Nome' cols='12 4'
                         placeholder='Informe o nome' />
                     <Field name='month' readOnly={readOnly}
-                         component={LabelAndInput} 
-                         type='number' label='Mes' cols='12 4' 
-                         placeholder='Informe o mes' 
-                         parse={value => !value ? null : Number(value)} />
-                    <Field name='year' readOnly={readOnly} 
-                        component={LabelAndInput} 
-                        type='number' label='Ano' cols='12 4' 
-                        placeholder='Informe o ano' 
+                        component={LabelAndInput}
+                        type='number' label='Mes' cols='12 4'
+                        placeholder='Informe o mes'
                         parse={value => !value ? null : Number(value)} />
-                    <CreditList cols='12 6' list={credits} field='credits' legend='Créditos' readOnly={readOnly}/>  
+                    <Field name='year' readOnly={readOnly}
+                        component={LabelAndInput}
+                        type='number' label='Ano' cols='12 4'
+                        placeholder='Informe o ano'
+                        parse={value => !value ? null : Number(value)} />
+                    <Summary credit={sumOfCredits} debt={sumOfDebts} />
+                    <CreditList cols='12 6' list={credits} field='credits' legend='Créditos' readOnly={readOnly} />
+                    <CreditList cols='12 6' list={debts} showStatus={true} field='debts' legend='Debitos' readOnly={readOnly} />
                 </div>
                 <div className='box-footer'>
                     <button className={`btn btn-${this.props.submitClass}`} type='submit'>
@@ -42,6 +53,9 @@ class BillingCycleForm extends Component {
 }
 BillingCycleForm = reduxForm({ form: 'billingCycleForm', destroyOnUnmount: false })(BillingCycleForm)//destroyOnUnmount flega que quando o componente for destruido ele nao destrua os dados inicializados
 const selector = formValueSelector('billingCycleForm')//passei o id fo formulario para ele saber de qual formulario ele vai pegar
-const mapStateToProps = state => ({credits: selector(state,'credits')})// o objeto 'selector' precisa de dois parametros o estado da aplicacao mais qual a propriedade que vc quer extrair do estado
+const mapStateToProps = state => ({
+    credits: selector(state, 'credits'),// o objeto 'selector' precisa de dois parametros o estado da aplicacao mais qual a propriedade que vc quer extrair do estado
+    debts: selector(state, 'debts')
+})
 const mapDispatchToProps = dispatch => bindActionCreators({ init }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)
